@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<body>
+
+<h1>Cambio de imágenes con JavaScript</h1>
+
+<img id="myFPImage"
+     onclick="cambiaPic()"
+     src = "./imagenes/arcoiris_color.jpg";
+     width="100"
+     height="180">
+
+<p>Haz click sobre las letras para cambiarlas.</p>
+
+<script>
+function cambiaPic() {
+    var image = document.getElementById('myFPImage');
+
+    if (image.src.match("negro")) {
+        image.src = "./imagenes/arcoiris_color.jpg";
+    } else {
+        image.src = "./imagenes/arcoiris_blanco_negro.jpg";
+    }
+}
+</script>
+
+</body>
+</html>

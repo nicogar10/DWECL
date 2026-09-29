@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambio contenido y estilo</title>
+</head>
+<body>
+    <h1 id="titulo">Titulo original</h1>
+    <p id="parrafo">Este es el texto inicial del parrafo</p>
+
+    <button onclick="cambiarTexto()">Cambiar Texto</button>
+    <button onclick="cambiarEstilo()">Cambiar Estilo CSS</button>
+
+
+    <script>
+        function cambiarTexto() {
+            document.getElementById("titulo").textContent = "Titulo modificado correctamente"
+            document.getElementById("parrafo").textContent = "El contenido del parrafo ha sido modificado correctamente"
+        }
+
+        function cambiarEstilo() {
+            document.getElementById("titulo").style.color = "red"
+            document.getElementById("titulo").textContent.toUpperCase
+            document.getElementById("parrafo").style.backgroundColor = "yellow"
+            document.getElementById("parrafo").style.fontFamily = "arial"
+        }
+    </script>
+
+</body>
+</html>
