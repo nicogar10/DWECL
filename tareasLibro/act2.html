@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secuencia de imagénes</title>
+</head>
+<body>
+    
+    <img id="imagen" onclick="cambiarImagen()" src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZQVziyqPYft2v-DaKlt77lm2xowJOrCT0vIMZgrE2PQ&s=10"; width="500">
+
+    <script>
+        function cambiarImagen() {
+            if (imagen.src.match("PQ&s")) {
+                imagen.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7r8RzYgiWUfjMDRP0RS3-iJI4XdNxRlQnA15KfCkPnQ&s=10";
+            } else if (imagen.src.match("nQ&s")){
+                imagen.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaq3c-pWQ0Nb4oIjJuBYX61V_EH5TLuXrn6hIs7CAlmA&s=10";
+            } else if (imagen.src.match("mA&s&s")){
+                imagen.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaq3c-pWQ0Nb4oIjJuBYX61V_EH5TLuXrn6hIs7CAlmA&s=10";
+            } else {
+                imagen.src = "https://dmc2vm44yioo9.cloudfront.net/4bca9f80-0a92-429f-93f4-0653be5bab29.jpg";
+            }
+        }
+    </script>
+
+</body>
+</html>

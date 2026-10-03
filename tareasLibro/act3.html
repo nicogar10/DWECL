@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Verdadero o Falso</title>
+
+    <style>
+        .acierto {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Test de Verdadero o Falso</h1>
+
+    <div>
+        <p id="pregunta1">La capital de Francia es París.</p>
+        <button onclick="comprobar(1, true)">Verdadero</button>
+        <button onclick="comprobar(1, false)">Falso</button>
+    </div>
+
+    <div>
+        <p id="pregunta2">
+            Los colores de la bandera de Italia son amarillo, rojo y blanco.
+        </p>
+        <button onclick="comprobar(2, true)">Verdadero</button>
+        <button onclick="comprobar(2, false)">Falso</button>
+    </div>
+
+    <div>
+        <p id="pregunta3">
+            El himno de España no tiene letra.
+        </p>
+        <button onclick="comprobar(3, true)">Verdadero</button>
+        <button onclick="comprobar(3, false)">Falso</button>
+    </div>
+
+    <div>
+        <p id="pregunta4">
+            El gato es un mamífero.
+        </p>
+        <button onclick="comprobar(4, true)">Verdadero</button>
+        <button onclick="comprobar(4, false)">Falso</button>
+    </div>
+
+    <div>
+        <p id="pregunta5">
+            El cuerpo humano tiene 204 huesos.
+        </p>
+        <button onclick="comprobar(5, true)">Verdadero</button>
+        <button onclick="comprobar(5, false)">Falso</button>
+    </div>
+
+    <div>
+        <p id="pregunta6">
+            El agua hierve a 100 °C a nivel del mar.
+        </p>
+        <button onclick="comprobar(6, true)">Verdadero</button>
+        <button onclick="comprobar(6, false)">Falso</button>
+    </div>
+
+    <div>
+        <p id="pregunta7">
+            Júpiter es el planeta más grande del sistema solar.
+        </p>
+        <button onclick="comprobar(7, true)">Verdadero</button>
+        <button onclick="comprobar(7, false)">Falso</button>
+    </div>
+
+    <script>
+        var respuestas = {
+            1: true,
+            2: false,
+            3: true,
+            4: true,
+            5: false,
+            6: true,
+            7: true
+        };
+
+        function comprobar(numeroPregunta, respuestaUsuario) {
+
+            var frase = document.getElementById("pregunta" + numeroPregunta);
+
+            if (respuestaUsuario === respuestas[numeroPregunta]) {
+                frase.className = "acierto";
+            } else {
+                frase.className = "error";
+            }
+        }
+    </script>
+
+</body>
+</html>
