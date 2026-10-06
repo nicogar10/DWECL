@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculos</title>
+</head>
+<body>
+    
+    <h1>Actividad propuesta 2.1</h1>
+    <h3>Vista la función suma, realiza la función resta, multiplicación y división.</h3>
+    <p>Para mostrar todos estos resultados se han introducido los valores 16 y 3</p>
+    <p id="resSuma"></p>
+    <p id="resResta"></p>
+    <p id="resMulti"></p>
+    <p id="resDiv"></p>
+
+    <script>
+        
+        function suma(a, b) {
+            return a + b;
+        }
+        document.getElementById("resSuma").textContent = "Resultado suma = " + suma(16,3)
+
+        function resta(a, b) {
+           return a - b;
+        }
+        document.getElementById("resResta").textContent = "Resultado resta = " + resta(16,3)
+        
+        function multiplicacion(a, b) {
+            return a * b;
+        }
+        document.getElementById("resMulti").textContent = "Resultado multiplicación = " + multiplicacion(16,3)
+        
+        function division(a, b) {
+            return a / b;
+        }
+        document.getElementById("resDiv").textContent = "Resultado división = " + division(16,3)
+
+    </script>
+
+</body>
+</html>
