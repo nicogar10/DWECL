@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number</title>
+</head>
+<body>
+    
+    <h2>7. Averigua qué resultado darán las siguientes líneas de código:</h2>
+    <p>Number(“9 9”);</p>
+    <p>Number(“dos”);</p>
+    <br><br>
+
+    <p id="resultado1"></p>
+    <p> - Da como resultado: NaN - Porque "9 9" contiene un espacio entre los dos números, por lo que no representa un número válido y no lo convierte.</p>
+    <br>
+    <p id="resultado2"></p>
+    <p> - También da: NaN - Porque "dos" es texto y no se puede convertir directamente a un número.</p>
+
+    <script>
+        let dato1 = Number("9 9");
+        let dato2 = Number("dos");
+
+        document.getElementById("resultado1").textContent = ("Resultado 1: " + dato1);
+        document.getElementById("resultado2").textContent = ("Resultado 2: " + dato2);
+    </script>
+</body>
+</html>

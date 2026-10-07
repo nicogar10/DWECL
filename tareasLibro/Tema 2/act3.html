@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h2>3. Ejecuta las siguientes dos líneas de código y comprueba el contenido de la variable var. Interpreta y explica los resultados:</h2>
+    <p>var dato = “Ronaldo “ + 5 + 5;</p>
+    <p>var dato = 5 + 5 + “ Ronaldo “;</p>
+    <br><br>
+
+    <p id="resultado1"></p>
+    <p> - En este caso primero aparece "Ronaldo ", que es un texto. Por tanto, el + empieza a concatenar los valores</p>
+    <p id="resultado2"></p>
+    <p> - En este otro los dos primeros valores son números, así que primero se realiza la suma y después aparece el texto " Ronaldo ", por lo que se concatena</p>
+
+    <script>
+        var dato = "Ronaldo " + 5 + 5;
+        document.getElementById("resultado1").textContent = dato;
+
+        var dato = 5 + 5 + " Ronaldo ";
+        document.getElementById("resultado2").textContent = dato;
+    </script>
+</body>
+</html>

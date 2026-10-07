@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circunferencia</title>
+</head>
+<body>
+    <h2>1. Realiza un programa JavaScript que calcule el área y la longitud de una circunferencia de radio 5.</h2>
+    <p id="area">Aquí se mostrará el área</p>
+    <p id="long">Aquí la longitud</p>
+
+    <script>
+        let radio = 5;
+        let resArea = 3.14 * radio ** 2;
+        let resLong = 2 * 3.14 * radio;
+
+        document.getElementById("area").textContent = ("Área de la circunferencia de radio " + radio + " = " + resArea)
+        document.getElementById("long").textContent = ("Longitud de la circunferencia de radio " + radio + " = " + resLong)
+    </script>
+</body>
+</html>

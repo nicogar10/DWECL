@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos Listener</title>
+</head>
+<body>
+    
+    <h1>Eventos Listener</h1>
+
+    <!-- ========================================== -->
+    <!-- EVENTOS DE RATÓN                           -->
+    <!-- ========================================== -->
+    
+    <!-- Ratón 1: onclick -->
+    <button id="alClick">1. Hacer clic aquí</button>
+
+    <br><br>
+
+    <!-- Ratón 2: onmouseover -->
+    <div id="alPasar" style="background: #e2e8f0; padding: 10px; width: 250px;">
+        2. Pasa el ratón por encima de esta caja
+    </div>
+
+    <hr>
+
+    <!-- ========================================== -->
+    <!-- EVENTOS DE TEXTO / TECLADO                 -->
+    <!-- ========================================== -->
+
+    <!-- Texto 1: oninput (se activa mientras el usuario escribe) -->
+    <label>3. Escribe tu nombre (input):</label><br>
+    <input id="alEscribir" type="text">
+
+    <br><br>
+
+    <!-- Texto 2: onkeyup (se activa al soltar una tecla) -->
+    <label>4. Escribe un texto (keyup):</label><br>
+    <input id="alTexto" type="text">
+
+    <!-- Salida de texto en pantalla -->
+    <p id="salida"></p>
+
+    <script>
+        var salida = document.getElementById("salida");
+
+        // Funciones asociadas a los eventos de ratón
+        function alHacerClic() {
+            salida.textContent = "¡Has hecho clic en el botón!";
+        }
+        document.getElementById("alClick").addEventListener("click", alHacerClic, false)
+
+        function alPasarElRaton() {
+            document.getElementById("alPasar").textContent = ("¡El ratón está sobre la caja!")
+        }
+        document.getElementById("alPasar").addEventListener("mouseover", alPasarElRaton, false)
+
+        // Funciones asociadas a los eventos de texto
+        function alEscribirTexto(valor) {
+            salida.textContent = "Nombre en tiempo real: " + valor.target.value;
+            //.target.value es necesario para obtener lo que contiene (valor)
+        }
+        document.getElementById("alEscribir").addEventListener("input", alEscribirTexto, false)
+
+        function alSoltarTecla(valor) {
+            console.log("Número de caracteres (Consola F12): " + valor.target.value.length);
+        }
+        document.getElementById("alTexto").addEventListener("keyup", alSoltarTecla, false)
+    </script>
+</body>
+</html>
