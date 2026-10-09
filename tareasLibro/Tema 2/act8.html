@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extraer mes y año</title>
+</head>
+<body>
+    <h1>Extraer mes y año de una fecha</h1>
+    <p>Con la fecha actual de este dispositivo</p>
+    <p id="mes"></p>
+    <p id="anio"></p>
+
+    <script>
+        let fecha = new Date();
+
+        document.getElementById("mes").textContent = "Mes: " + (fecha.getMonth() + 1)
+        document.getElementById("anio").textContent = "Año: " + fecha.getFullYear()
+    </script>
+</body>
