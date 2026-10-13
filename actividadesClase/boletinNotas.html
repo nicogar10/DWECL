@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boletín de notas - Notas</title>
+    <style>
+        body {
+            background-color: azure;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            text-align: center;
+        }
+        .notas {
+            background-color: white;
+            border-radius: 15px;
+            width: 300px;
+            padding: 20px;
+        }
+        th {
+            background-color: lightgray;
+        }
+    </style>
+</head>
+<body>
+    <h1>Boletín de notas de la clase</h1>
+
+    <div class="notas">
+        <h3>Notas por trimestre</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Alumno</th>
+                    <th>1T</th>
+                    <th>2T</th>
+                    <th>3T</th>
+                    <th>Media</th>
+                    <th>Calificación</th>
+                </tr>
+            </thead>
+
+            <tbody id="datos">
+                <!-- estos datos se introducen en el bucle for del script -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="formulario">
+        <h3>Añadir alumno</h3>
+
+        <form id="formularioAlumno">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre">
+
+            <label for="1t">1T:</label>
+            <input type="number" id="1t">
+
+            <label for="2t">2T:</label>
+            <input type="number" id="2t">
+
+            <label for="3t">3T:</label>
+            <input type="number" id="3t">
+
+            <button type="submit">Añadir alumno</button>
+        </form>
+    </div>
+
+    <script>
+        let alumnos = [
+            {nombre: "Jose", "1T": 4, "2T": 3, "3T": 6},
+            {nombre: "Paco", "1T": 4, "2T": 7, "3T": 9}
+        ]
+
+        function media(alumno) {
+            return (alumno["1T"] + alumno["2T"] + alumno["3T"]) / 3;
+        }
+
+        function calificacion(alumno) {
+            if (media(alumno) < 5) {
+                return "Suspenso"
+            } else {
+                return "Aprobado"
+            }
+        }
+
+        let tabla = document.getElementById("datos")
+        for (let i = 0; i < alumnos.length; i++) {
+            let alumno = alumnos[i];
+
+            let fila = document.createElement("tr");
+
+            fila.innerHTML = `
+                <td>${alumno.nombre}</td>
+                <td>${alumno["1T"]}</td>
+                <td>${alumno["2T"]}</td>
+                <td>${alumno["3T"]}</td>
+                <td>${media(alumno).toFixed(2)}</td>
+                <td>${calificacion(alumno)}</td>
+            `;
+
+            tabla.appendChild(fila);
+        }
+    </script>
+</body>
+</html>
