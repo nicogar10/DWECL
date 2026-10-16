@@ -17,11 +17,25 @@
         .notas {
             background-color: white;
             border-radius: 15px;
-            width: 300px;
+            width: 490px;
             padding: 20px;
         }
         th {
+            padding: 15px 20px;
             background-color: lightgray;
+        }
+        td {
+            padding: 10px;
+        }
+        .aprobado {
+            background-color: lightgreen;
+        }
+
+        .suspenso {
+            background-color: lightcoral;
+        }
+        table {
+            text-align: center;
         }
     </style>
 </head>
@@ -65,14 +79,39 @@
             <label for="3t">3T:</label>
             <input type="number" id="3t">
 
-            <button type="submit">Añadir alumno</button>
+            <button type="button" onclick="anadirAlumno()">Añadir alumno</button>
         </form>
+    </div>
+    
+    <div class="consultas">
+        <br><br>
+        <h3>Consultas</h3>
+
+        <button type="button" onclick="contarAprobados()">Contar aprobados</button>
+        <button type="button" onclick="mejorNota()">Mejor nota de la clase</button>
+        <button type="button" onclick="mediaTrimestre()">Media de un trimestre</button>
+
+        <select id="trimestre">
+            <option value="1T">1º trimestre</option>
+            <option value="2T">2º trimestre</option>
+            <option value="3T">3º trimestre</option>
+        </select>
+
+        <br><br>
+
+        <input type="text" id="buscarNombre" placeholder="Nombre del alumno">
+
+        <button type="button" onclick="buscarAlumno()">Buscar alumno</button>
+
+        <h3>Resultado</h3>
+        <p id="resultadoConsultas"></p>
     </div>
 
     <script>
         let alumnos = [
             {nombre: "Jose", "1T": 4, "2T": 3, "3T": 6},
-            {nombre: "Paco", "1T": 4, "2T": 7, "3T": 9}
+            {nombre: "Paco", "1T": 4, "2T": 7, "3T": 9},
+            {nombre: "Manuel", "1T": 10, "2T": 9, "3T": 9}
         ]
 
         function media(alumno) {
@@ -80,30 +119,113 @@
         }
 
         function calificacion(alumno) {
-            if (media(alumno) < 5) {
-                return "Suspenso"
+            let nota = media(alumno);
+
+            if (nota < 5) {
+                return "Insuficiente";
+            } else if (nota < 6) {
+                return "Suficiente";
+            } else if (nota < 7) {
+                return "Bien";
+            } else if (nota < 9) {
+                return "Notable";
             } else {
-                return "Aprobado"
+                return "Sobresaliente";
             }
         }
 
-        let tabla = document.getElementById("datos")
-        for (let i = 0; i < alumnos.length; i++) {
-            let alumno = alumnos[i];
+        function tabla() {
+            let tabla = document.getElementById("datos");
 
-            let fila = document.createElement("tr");
+            tabla.innerHTML = "";
 
-            fila.innerHTML = `
-                <td>${alumno.nombre}</td>
-                <td>${alumno["1T"]}</td>
-                <td>${alumno["2T"]}</td>
-                <td>${alumno["3T"]}</td>
-                <td>${media(alumno).toFixed(2)}</td>
-                <td>${calificacion(alumno)}</td>
-            `;
+            for (let i = 0; i < alumnos.length; i++) {
+                let alumno = alumnos[i];
 
-            tabla.appendChild(fila);
+                let fila = document.createElement("tr");
+
+                fila.innerHTML = `
+                    <td>${alumno.nombre}</td>
+                    <td>${alumno["1T"]}</td>
+                    <td>${alumno["2T"]}</td>
+                    <td>${alumno["3T"]}</td>
+                    <td><b>${media(alumno).toFixed(2)}</b></td>
+                    <td>${calificacion(alumno)}</td>
+                `;
+
+                if (alumno["1T"] >= 5) {
+                    fila.children[1].className = "aprobado";
+                } else {
+                    fila.children[1].className = "suspenso";
+                }
+
+                if (alumno["2T"] >= 5) {
+                    fila.children[2].className = "aprobado";
+                } else {
+                    fila.children[2].className = "suspenso";
+                }
+
+                if (alumno["3T"] >= 5) {
+                    fila.children[3].className = "aprobado";
+                } else {
+                    fila.children[3].className = "suspenso";
+                }
+
+                tabla.appendChild(fila);
+            }
         }
+
+        function anadirAlumno() {
+            let nombre = document.getElementById("nombre").value.trim();
+            let n1 = document.getElementById("1t").value;
+            let n2 = document.getElementById("2t").value;
+            let n3 = document.getElementById("3t").value;
+
+            if (nombre === "") {
+                alert("Error: escribe un nombre.");
+                return;
+            }
+
+            if (n1 === "" || n2 === "" || n3 === "") {
+                alert("Error: introduce las tres notas.");
+                return;
+            }
+
+            n1 = Number(n1);
+            n2 = Number(n2);
+            n3 = Number(n3);
+
+            if (n1 < 0 || n1 > 10 ||
+                n2 < 0 || n2 > 10 ||
+                n3 < 0 || n3 > 10) {
+                alert("Error: las notas deben estar entre 0 y 10.");
+                return;
+            }
+
+            alumnos.push({
+                nombre: nombre,
+                "1T": n1,
+                "2T": n2,
+                "3T": n3
+            });
+
+            tabla();
+
+            document.getElementById("formularioAlumno").reset();
+        }
+
+        function contarAprobados() {
+            let contador = 0;
+
+            for (let i = 0; i < alumnos.length; i++) {
+                if (media(alumnos[i]) >= 5) {
+                    contador++;
+                }
+            }
+            document.getElementById("resultadoConsultas").textContent = "Número de alumnos aprobados: " + contador;
+        }
+
+        tabla();
     </script>
 </body>
 </html>
