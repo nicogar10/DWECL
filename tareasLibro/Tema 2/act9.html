@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 9</title>
+</head>
+<body>
+    <h2>Array milista</h2>
+    <p id="resultado"></p>
+
+    <script>
+        var milista = ['panadero', 456, [0, 1, 2]];
+        var resultado = document.getElementById("resultado");
+
+        resultado.innerHTML = "<br>" +
+            "Posición 0: " + milista[0] + "<br>" + "<br>" +
+            "Posición 1: " + milista[1] + "<br>" + "<br>" +
+            "Posición 2: " + milista[2] + "<br>" + "<br>" +
+            "Posición 2 - elemento 2: " + milista[2][2];
+    </script>
+</body>
+</html>

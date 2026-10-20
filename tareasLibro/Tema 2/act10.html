@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 10</title>
+</head>
+<body>
+    <h2>Dibuja un rombo</h2>
+    <input type="number" id="numero" placeholder="Escribe el número de filas">
+    <button onclick="mostrarRombo()">Aceptar</button>
+    <div id="caja"><br><br></div>
+
+    <script>
+        function mostrarRombo() {
+            var caja = document.getElementById("caja");
+            var numero = parseInt(document.getElementById("numero").value);
+
+            caja.innerHTML = "<br><br>";
+
+            // Creciente
+            for (var i = 0; i < numero; i++) {
+                var asterisco = "";
+                var espacioHTML = "";
+
+                for (var j = 0; j < numero - i - 1; j++) {
+                    espacioHTML += "&nbsp;&nbsp;";
+                }
+
+                for (var k = 0; k < 2 * i + 1; k++) {
+                    if (k == 0 || k == 2 * i) {
+                        asterisco += "*";
+                    } else {
+                        asterisco += "&nbsp;&nbsp;";
+                    }
+                }
+
+                caja.innerHTML += espacioHTML + asterisco + "<br>";
+            }
+
+            // Decreciente
+            for (var i = numero - 2; i >= 0; i--) {
+                var asterisco = "";
+                var espacioHTML = "";
+
+                for (var k = 0; k < numero - i - 1; k++) {
+                    espacioHTML += "&nbsp;&nbsp;";
+                }
+
+                for (var j = 0; j < 2 * i + 1; j++) {
+                    if (j == 0 || j == 2 * i) {
+                        asterisco += "*";
+                    } else {
+                        asterisco += "&nbsp;&nbsp;";
+                    }
+                }
+
+                caja.innerHTML += espacioHTML + asterisco + "<br>";
+            }
+        }
+    </script>
+</body>
+</html>
