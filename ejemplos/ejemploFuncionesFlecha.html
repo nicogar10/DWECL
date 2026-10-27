@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo funciones flecha</title>
+</head>
+<body>
+
+
+    <script>
+        //Forma tradicional
+        function doble(n) {
+            return n * 2;
+        }
+        //Función flecha
+        const doble = n => n * 2;
+
+        //Forma tradicional
+        function sumar(a, b) {
+            return a + b;
+        }
+        //Función flecha
+        const sumar = (a, b) => a + b;
+
+        //Forma tradicional
+        function saludar() {
+            console.log("Hola");
+        }
+        //Función flecha
+        const saludar = () => console.log("Hola");
+
+        //Forma tradicional
+        function crono() {
+            console.log("tic");
+        }
+        setInterval(crono, 1000);
+        //Función flecha
+        setInterval(() => console.log("tic"), 1000);
+
+
+        //TAREA
+        //Función triple
+        const triple = n => n * 3;
+
+        //Función crono
+        const crono = () => console.log("tic", 1000)
+        
+    </script>
+</body>
+</html>

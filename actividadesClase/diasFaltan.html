@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Días que faltan</title>
+</head>
+<body>
+
+    <h1>¿Cuántos días faltan?</h1>
+
+    <label for="fecha">Elige una fecha:</label>
+    <input type="date" id="fecha">
+
+    <button id="boton">Calcular</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        const diasHasta = (fecha) => {
+            const hoy = new Date();
+            const fechaElegida = new Date(fecha);
+
+            hoy.setHours(0, 0, 0, 0);
+            fechaElegida.setHours(0, 0, 0, 0);
+
+            const diferencia = fechaElegida - hoy;
+
+            const dias = Math.round(diferencia / 86400000);
+
+            return dias;
+        };
+
+        document.getElementById("boton").addEventListener("click", () => {
+            const fecha = document.getElementById("fecha").value;
+            const resultado = document.getElementById("resultado");
+
+            if (fecha === "") {
+                resultado.textContent = "Selecciona una fecha.";
+            } else {
+                const dias = diasHasta(fecha);
+
+                if (dias > 0) {
+                    resultado.textContent = "Faltan " + dias + " días.";
+                } else if (dias === 0) {
+                    resultado.textContent = "La fecha es hoy";
+                } else {
+                    resultado.textContent = "Esa fecha pasó hace " + dias * -1 + " días.";
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
