@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar tema y recuerda</title>
+
+    <style>
+        body {
+            background-color: white;
+            color: black;
+        }
+
+        .oscuro {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>3.3 - 3.4 | Ejercicio 2: Tema que se recuerda</h1>
+
+    <p>Tema actual: <span id="temaActual"></span></p>
+
+    <button onclick="cambiarTema()">Cambiar tema</button>
+
+    <script>
+        // Aplicar el tema guardado al cargar la página
+        function aplicarTema() {
+            let tema = localStorage.getItem("tema");
+
+            if (tema === null) {
+                tema = "claro";
+            }
+
+            if (tema === "oscuro") {
+                document.body.classList.add("oscuro");
+            } else {
+                document.body.classList.remove("oscuro");
+            }
+
+            document.getElementById("temaActual").textContent = tema;
+        }
+
+        // Cambiar entre claro y oscuro
+        function cambiarTema() {
+            let tema = localStorage.getItem("tema");
+
+            if (tema === null) {
+                tema = "claro";
+            }
+
+            if (tema === "claro") {
+                tema = "oscuro";
+            } else {
+                tema = "claro";
+            }
+
+            localStorage.setItem("tema", tema);
+
+            aplicarTema();
+        }
+
+        // Ejecutar al abrir la página
+        aplicarTema();
+    </script>
+
+</body>
+</html>

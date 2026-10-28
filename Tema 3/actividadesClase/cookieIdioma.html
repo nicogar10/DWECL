@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie de idioma</title>
+</head>
+<body>
+
+    <h1>3.3 - 3.4 | Ejercicio 1: Cookie de idioma</h1>
+
+    <button onclick="crearCookie()">Crear cookie</button>
+    <button onclick="mostrarCookie()">Leer cookie</button>
+    <button onclick="borrarCookie()">Borrar cookie</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        //Crear una cookie que dure 7 días
+        function crearCookie() {
+            document.cookie = "idioma=es; max-age=86400; path=/";
+
+            document.getElementById("resultado").textContent = "Cookie creada correctamente.";
+        }
+
+        //Leer una cookie por su nombre
+        function leerCookie(nombre) {
+            const pares = document.cookie.split("; ");
+
+            for (let i = 0; i < pares.length; i++) {
+                const partes = pares[i].split("=");
+
+                if (partes[0] === nombre) {
+                    return decodeURIComponent(partes[1]);
+                }
+            }
+
+            return null;
+        }
+
+        //Mostrar la cookie
+        function mostrarCookie() {
+            const idioma = leerCookie("idioma");
+
+            if (idioma === null) {
+                document.getElementById("resultado").textContent = "La cookie no existe.";
+            } else {
+                document.getElementById("resultado").textContent = "El idioma guardado es: " + idioma;
+            }
+        }
+
+        //Borrar la cookie
+        function borrarCookie() {
+            document.cookie = "idioma=; max-age=0; path=/";
+
+            document.getElementById("resultado").textContent = "Cookie borrada.";
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de tareas</title>
+</head>
+<body>
+
+    <h1>3.3 - 3.4 | Ejercicio 3: Lista de tareas</h1>
+
+    <input type="text" id="textoTarea" placeholder="Escribe una tarea">
+
+    <button onclick="anadirTarea(document.getElementById('textoTarea').value)">Añadir tarea</button>
+
+    <h2>Mis tareas</h2>
+
+    <ul id="listaTareas"></ul>
+
+    <script>
+        // Añadir una tarea al array
+        function anadirTarea(texto) {
+            texto = texto.trim();
+
+            if (texto === "") {
+                alert("Escribe una tarea.");
+                return;
+            }
+
+            let tareas = localStorage.getItem("tareas");
+
+            if (tareas === null) {
+                tareas = [];
+            } else {
+                tareas = JSON.parse(tareas);
+            }
+
+            tareas.push(texto);
+
+            localStorage.setItem("tareas", JSON.stringify(tareas));
+
+            document.getElementById("textoTarea").value = "";
+
+            verTareas();
+        }
+
+        // Recuperar y mostrar las tareas guardadas
+        function verTareas() {
+            let tareas = localStorage.getItem("tareas");
+
+            if (tareas === null) {
+                tareas = [];
+            } else {
+                tareas = JSON.parse(tareas);
+            }
+
+            const lista = document.getElementById("listaTareas");
+
+            lista.innerHTML = "";
+
+            for (let i = 0; i < tareas.length; i++) {
+                const elemento = document.createElement("li");
+
+                elemento.textContent = tareas[i];
+
+                lista.appendChild(elemento);
+            }
+        }
+
+        // Mostrar las tareas al cargar la página
+        verTareas();
+    </script>
+
+</body>
+</html>
