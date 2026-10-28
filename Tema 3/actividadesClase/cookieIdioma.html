@@ -19,7 +19,7 @@
     <script>
         //Crear una cookie que dure 7 días
         function crearCookie() {
-            document.cookie = "idioma=es; max-age=86400; path=/";
+            document.cookie = "idioma=es; max-age=" + (7 * 24 * 3600) + "; path=/";
 
             document.getElementById("resultado").textContent = "Cookie creada correctamente.";
         }
