@@ -16,6 +16,8 @@ class Incidencia {
   html() {
     let clases = "incidencia " + this.prioridad;
     if (this.resuelta) clases += " resuelta";
+    //Si la incidencia es urgente le añade la clase urgente reto 5
+    if (this.esUrgente()) clases += " urgente";
     const hora = new Date(this.fecha).toLocaleTimeString("es-ES");
 
     let html = "<article class='" + clases + "'>";
@@ -30,6 +32,9 @@ class Incidencia {
     if (!this.resuelta) {
       html += "<button type='button' onclick='resolver(" + this.id + ")'>Resolver</button>";
     }
+
+    //Boton eliminar reto 4
+    html += "<button type='button' onclick='eliminar(" + this.id + ")'>Eliminar</button>";
     html += "</article>";
     return html;
   }
@@ -39,6 +44,11 @@ class Incidencia {
   minutos() {
     //Math.floor trunca el numero
     return Math.floor((Date.now() - this.fecha) / 60000);
+  }
+
+  //Metodo para saber si una incidencia es urgente reto 5
+  esUrgente() {
+    return this.prioridad === "alta" && this.resuelta === false && this.minutos() > 30;
   }
 }
 
@@ -82,12 +92,20 @@ function pintar() {
   // TODO RETO 2: cuenta las que NO están resueltas y muéstralo así:
   //   "Total: 4 · Pendientes: 3"
   let pendientes = 0;
+  // Contamos cuantas son urgentes para añadirlo a la pestaña reto 5
+  let urgentes = 0;
   for (let i = 0; i < incidencias.length; i++) {
     if (!incidencias[i].resuelta) {
       pendientes++;
     }
+    // Si es urgente suma 1 reto 5
+    if (incidencias[i].esUrgente()) {
+      urgentes++;
+    }
   }
   document.getElementById("resumen").textContent = "Total: " + incidencias.length + " · Pendientes: " + pendientes;
+  //Muestra en la pestaña el numero de incidencias urgentes
+  document.title = "(" + urgentes + ") Incidencias del aula";
 }
 
 // Muestra un mensaje que desaparece a los 2 segundos (3.2)
@@ -135,16 +153,18 @@ function resolver(id) {
   }
 }
 
-/**
- *for (let i = 0; i < incidencias.length; i++) {
-    if (incidencias[i].id === id) {
-      incidencias[i].resuelta = true;
-      break;
+//Funcion eliminar reto 4
+function eliminar(id) {
+  if (confirm("¿Seguro que quieres eliminar esta incidencia?")) {
+    for (let i = 0; i < incidencias.length; i++) {
+      if (incidencias[i].id === id) {
+        incidencias.splice(i, 1);
+        guardar();
+        pintar();
+      }
     }
   }
-  guardar();
-  pintar();
- */
+}
 
 // =====================================================================
 // 5. AL ABRIR LA PÁGINA
@@ -171,3 +191,5 @@ setInterval(() => {
 
 cargar();
 pintar();
+//De esta forma pintar se vuelve a ejecutar cada minuto para comprobar si alguna incidencia urgente ya ha superado los 30 minutos reto 5
+setInterval(pintar, 60000);
