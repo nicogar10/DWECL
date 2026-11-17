@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funciones recursivas</title>
+</head>
+<body>
+
+    <h1>Dos Funciones recursivas</h1>
+
+    <script>
+        function sumaDigitos(n) {
+
+            if (n < 10) {
+                return n;
+            }
+
+            return (n % 10) + sumaDigitos(Math.floor(n / 10));
+        }
+
+        function potencia(base, exp) {
+
+            if (exp === 0) {
+                return 1;
+            }
+
+            return base * potencia(base, exp - 1);
+        }
+
+        document.write("Suma de los dígitos de 1234: " + sumaDigitos(1234) + "<br>");
+
+        document.write("Potencia de 2 elevado a 3: " + potencia(2, 3));
+    </script>
+
+</body>
+</html>

@@ -138,30 +138,56 @@ const carrito = {
     return true;
   },
 
-
   // TODO EJERCICIO 3 · quitar(id): quita del array la línea de ese producto
   quitar(id) {
+    for (let i = 0; i < this.lineas.length; i++) {
+      if (this.lineas[i].producto.id === id) {
+        this.lineas.splice(i, 1);
+        break;
+      }
+    }
   },
 
   // TODO EJERCICIO 3 · vaciar(): deja el carrito sin líneas y sin descuento
   vaciar() {
+    this.lineas = [];
+    this.descuento = 0;
   },
 
   // TODO EJERCICIO 3 · unidades(): suma de las cantidades de todas las líneas
   unidades() {
-    return 0;
+    let suma = 0;
+
+    for (let i = 0; i < this.lineas.length; i++) {
+      suma = suma + this.lineas[i].cantidad;
+    }
+
+    return suma;
   },
 
   // TODO EJERCICIO 3 · total(): suma de los subtotales de todas las líneas
   total() {
-    return 0;
+    let suma = 0;
+
+    for (let i = 0; i < this.lineas.length; i++) {
+      suma = suma + this.lineas[i].subtotal();
+    }
+
+    return suma;
   },
 
   // TODO EJERCICIO 4 · aplicarCodigo(codigo): si el código es "DAW10"
   // (da igual mayúsculas o espacios), pon descuento a 0.10 y devuelve true.
   // Si no, devuelve false.
   aplicarCodigo(codigo) {
-    return false;
+    codigo = codigo.trim().toUpperCase();
+
+    if (codigo === "DAW10") {
+      this.descuento = 0.10;
+      return true;
+    } else {
+      return false;
+    }
   },
 
   // DADO: rebaja y total final, redondeados a céntimos para que las cuentas cuadren
@@ -180,8 +206,34 @@ const carrito = {
 //  - Ejercicio 4: si hay descuento, muestra también el subtotal y la rebaja
 // ---------------------------------------------------------------------
 function pintarCarrito() {
-  document.getElementById("carrito-lineas").innerHTML =
-    "<p class='vacio'>Carrito pendiente de programar (" + carrito.lineas.length + " líneas)</p>";
+  let html = "";
+
+  if (carrito.lineas.length === 0) {
+    html = "<p class='vacio'>Tu carrito está vacío</p>";
+  } else {
+    for (let i = 0; i < carrito.lineas.length; i++) {
+      html += carrito.lineas[i].html();
+    }
+  }
+
+  document.getElementById("carrito-lineas").innerHTML = html;
+
+  let resumen = "";
+
+  resumen += "<p><span>Unidades</span><b>" + carrito.unidades() + "</b></p>";
+
+  if (carrito.descuento > 0) {
+    resumen += "<p><span>Subtotal</span><b>" + carrito.total().toFixed(2) + " €</b></p>";
+
+    resumen += "<p class='descuento'><span>Descuento (10 %)</span><b>-" + carrito.rebaja().toFixed(2) + " €</b></p>";
+
+    resumen += "<p class='total'><span>Total</span><b>" + carrito.totalFinal().toFixed(2) + " €</b></p>";
+  } else {
+    resumen += "<p class='total'><span>Total</span><b>" + carrito.total().toFixed(2) + " €</b></p>";
+  }
+
+  document.getElementById("carrito-resumen").innerHTML = resumen;
+
   guardar();
 }
 
@@ -191,9 +243,41 @@ function pintarCarrito() {
 // Al cargar, busca cada producto por su id y vuelve a crear la LineaCarrito.
 // ---------------------------------------------------------------------
 function guardar() {
+  let datos = {
+    lineas: [],
+    descuento: carrito.descuento
+  };
+
+  for (let i = 0; i < carrito.lineas.length; i++) {
+    datos.lineas.push({
+      id: carrito.lineas[i].producto.id,
+      cantidad: carrito.lineas[i].cantidad
+    });
+  }
+
+  localStorage.setItem("carrito", JSON.stringify(datos));
 }
 
 function cargar() {
+  let datos = localStorage.getItem("carrito");
+
+  if (datos !== null) {
+    datos = JSON.parse(datos);
+
+    carrito.lineas = [];
+
+    for (let i = 0; i < datos.lineas.length; i++) {
+      let producto = buscarProducto(datos.lineas[i].id);
+
+      if (producto !== null) {
+        carrito.lineas.push(
+          new LineaCarrito(producto, datos.lineas[i].cantidad)
+        );
+      }
+    }
+
+    carrito.descuento = datos.descuento;
+  }
 }
 
 // ---------------------------------------------------------------------

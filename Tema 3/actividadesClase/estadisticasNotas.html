@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas de notas</title>
+</head>
+<body>
+
+    <h1>Estadísticas de notas</h1>
+
+    <script>
+        const notas = [6, 3.5, 8, 9.5, 4, 7];
+
+        const aprobadas = notas.filter(nota => nota >= 5);
+
+        const media = notas.reduce((acumulado, nota) => acumulado + nota, 0) / notas.length;
+
+        const mayor = notas.reduce((acumulado, nota) => {
+            if (nota > acumulado) {
+                return nota;
+            } else {
+                return acumulado;
+            }
+        });
+
+        document.write("Notas: " + notas + "<br>");
+        document.write("Aprobadas: " + aprobadas + "<br>");
+        document.write("Media: " + media.toFixed(2) + "<br>");
+        document.write("Nota más alta: " + mayor);
+    </script>
+
+</body>
+</html>

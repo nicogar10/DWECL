@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capitalizar nombres</title>
+</head>
+<body>
+
+    <h1>Capitalizar nombres</h1>
+
+    <script>
+        function capitalizar(texto) {
+
+            const palabras = texto.split(" ");
+
+            const resultado = palabras.map(palabra => {
+                return palabra.charAt(0).toUpperCase() + palabra.slice(1);
+            });
+
+            return resultado.join(" ");
+        }
+
+        const nombre = "ana garcía lópez";
+
+        document.write("Nombre original: " + nombre + "<br>");
+        document.write("Nombre capitalizado: " + capitalizar(nombre));
+    </script>
+
+</body>
+</html>
